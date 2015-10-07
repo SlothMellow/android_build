@@ -71,10 +71,10 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^du_") ; then
-       DU_BUILD=$(echo -n $1 | sed -e 's/^du_//g')
+    if (echo -n $1 | grep -q -e "^sm6_") ; then
+       SM6_BUILD=$(echo -n $1 | sed -e 's/^sm6_//g')
     else
-       DU_BUILD=
+       SM6_BUILD=
     fi
 
         TARGET_PRODUCT=$1 \
@@ -505,10 +505,10 @@ function brunch()
 function breakfast()
 {
     target=$1
-    DU_DEVICES_ONLY="true"
+    SM6_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/du/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/sm6/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -524,8 +524,8 @@ function breakfast()
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the du model name
-            lunch du_$target-userdebug
+            # This is probably just the sm6 model name
+            lunch sm6_$target-userdebug
         fi
     fi
     return $?

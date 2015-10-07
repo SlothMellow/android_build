@@ -52,7 +52,7 @@ except:
     device = product
 
 if not depsonly:
-    print("Device %s not found. Attempting to retrieve device repository from DirtyUnicorns Github (http://github.com/DirtyUnicorns)." % device)
+    print("Device %s not found. Attempting to retrieve device repository from SlothMellow Github (http://github.com/SlothMellow)." % device)
 
 repositories = []
 
@@ -71,7 +71,7 @@ def add_auth(githubreq):
         githubreq.add_header("Authorization","Basic %s" % githubauth)
 
 if not depsonly:
-    githubreq = urllib.request.Request("https://api.github.com/search/repositories?q=%s+user:DirtyUnicorns+in:name+fork:true" % device)
+    githubreq = urllib.request.Request("https://api.github.com/search/repositories?q=%s+user:SlowhMellows+in:name+fork:true" % device)
     add_auth(githubreq)
     try:
         result = json.loads(urllib.request.urlopen(githubreq).read().decode())
@@ -117,7 +117,7 @@ def get_default_revision():
 
 def get_from_manifest(devicename):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/du_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/sm6_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -141,7 +141,7 @@ def get_from_manifest(devicename):
 
 def is_in_manifest(projectname):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/du_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/sm6_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -165,7 +165,7 @@ def is_in_manifest(projectname):
 
 def add_to_manifest(repositories, fallback_branch = None):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/du_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/sm6_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -177,9 +177,9 @@ def add_to_manifest(repositories, fallback_branch = None):
             print('DirtyUnicorns/%s already exists' % (repo_name))
             continue
 
-        print('Adding dependency: DirtyUnicorns/%s -> %s' % (repo_name, repo_target))
+        print('Adding dependency: SlothMewllow/%s -> %s' % (repo_name, repo_target))
         project = ElementTree.Element("project", attrib = { "path": repo_target,
-            "remote": "du", "name": "%s" % repo_name })
+            "remote": "sm6", "name": "%s" % repo_name })
 
         if 'branch' in repository:
             project.set('revision',repository['branch'])
@@ -195,13 +195,13 @@ def add_to_manifest(repositories, fallback_branch = None):
     raw_xml = ElementTree.tostring(lm).decode()
     raw_xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + raw_xml
 
-    f = open('.repo/local_manifests/du_manifest.xml', 'w')
+    f = open('.repo/local_manifests/sm6_manifest.xml', 'w')
     f.write(raw_xml)
     f.close()
 
 def fetch_dependencies(repo_path, fallback_branch = None):
     print('Looking for dependencies')
-    dependencies_path = repo_path + '/du.dependencies'
+    dependencies_path = repo_path + '/sm6.dependencies'
     syncable_repos = []
 
     if os.path.exists(dependencies_path):
@@ -293,4 +293,4 @@ else:
             print("Done")
             sys.exit()
 
-print("Repository for %s not found in the DirtyUnicorns Github repository list. If this is in error, you may need to manually add it to your local_manifests/du_manifest.xml." % device)
+print("Repository for %s not found in the SlothMellow Github repository list. If this is in error, you may need to manually add it to your local_manifests/sm6_manifest.xml." % device)
