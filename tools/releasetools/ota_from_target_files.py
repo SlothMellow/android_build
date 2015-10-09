@@ -587,26 +587,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   device_specific.FullOTA_InstallBegin()
 
   script.Print("")
-  script.Print("       || THANK YOU FOR FLASHING ||        ")
+  script.Print("       || SlothMellow By Team-Nocturnal ||        ")
   script.Print("")
-  script.Print("DDDDDDDDDDDDD        UUUUUUUU     UUUUUUUU");
-  script.Print("D::::::::::::DDD     U::::::U     U::::::U");
-  script.Print("D:::::::::::::::DD   U::::::U     U::::::U");
-  script.Print("DDD:::::DDDDD:::::D  UU:::::U     U:::::UU");
-  script.Print("  D:::::D    D:::::D  U:::::U     U:::::U ");
-  script.Print("  D:::::D     D:::::D U:::::D     D:::::U ");
-  script.Print("  D:::::D     D:::::D U:::::D     D:::::U ");
-  script.Print("  D:::::D     D:::::D U:::::D     D:::::U ");
-  script.Print("  D:::::D     D:::::D U:::::D     D:::::U ");
-  script.Print("  D:::::D     D:::::D U:::::D     D:::::U ");
-  script.Print("  D:::::D     D:::::D U:::::D     D:::::U ");
-  script.Print("  D:::::D    D:::::D  U::::::U   U::::::U ");
-  script.Print("DDD:::::DDDDD:::::D   U:::::::UUU:::::::U ");
-  script.Print("D:::::::::::::::DD     UU:::::::::::::UU  ");
-  script.Print("D::::::::::::DDD         UU:::::::::UU    ");
-  script.Print("DDDDDDDDDDDDD              UUUUUUUUU      ");
-  script.Print("")
-  script.Print("          ||| ANDROID 6.0.0 |||           ")
+  script.Print("                     Enjoy!!!!!           ")
   script.Print("")
 
   if OPTIONS.backuptool:
@@ -693,11 +676,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     if block_based:
       script.Unmount("/system")
 
-  if block_based:
-    script.Print("Flashing SuperSU...")
-    common.ZipWriteStr(output_zip, "supersu/supersu.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/UPDATE-SuperSU.zip"))
-    script.FlashSuperSU()
   if block_based:
      script.Print("Flashing Boot Image...")
      script.WriteRawImage("/boot", "boot.img")
